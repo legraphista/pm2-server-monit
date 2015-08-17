@@ -1,22 +1,13 @@
 
-var cpu = require('./lib/cpu'),
-    os = require('./lib/os'),
-    drive = require('./lib/drive'),
-    users = require('./lib/users'),
-    pmx = require('pmx'),
+var pmx = require('pmx'),
     pm2 = require('pm2'),
     shelljs = require('shelljs'),
     fs      = require('fs'),
     path    = require('path');
 
-if (process.platform == 'linux')
-  var netstat = require('./lib/netstat'),
-      mem = require('./lib/mem'),
-      proc = require('./lib/proc');
-
+    pmx.alert = false;
 
 var conf = pmx.initModule({
-
   pid              : pmx.resolvePidPaths([]),
 
   widget : {
@@ -40,6 +31,7 @@ var conf = pmx.initModule({
       meta : true,
       cpu: false,
       mem: false,
+      alert: false,
       main_probes : ['CPU usage', 'Free memory', 'Avail. Disk', 'Total Processes', 'TTY/SSH opened', 'eth0 input', 'eth0 output', 'Operating System']
     }
 
@@ -48,6 +40,15 @@ var conf = pmx.initModule({
   }
 });
 
+var cpu = require('./lib/cpu'),
+    os = require('./lib/os'),
+    drive = require('./lib/drive'),
+    users = require('./lib/users');
+
+if (process.platform == 'linux')
+  var netstat = require('./lib/netstat'),
+      mem = require('./lib/mem'),
+      proc = require('./lib/proc');
 
 if (process.platform == 'linux') {
   pmx.action('top cpu consuming', function(reply) {
@@ -117,4 +118,3 @@ pmx.action('open files', function(reply) {
     return reply(result);
   });
 });
-
