@@ -31,7 +31,6 @@ var conf = pmx.initModule({
       meta : true,
       cpu: false,
       mem: false,
-      alert: false,
       main_probes : ['CPU usage', 'Free memory', 'Avail. Disk', 'Total Processes', 'TTY/SSH opened', 'eth0 input', 'eth0 output', 'Operating System']
     }
 
