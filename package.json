@@ -11,6 +11,12 @@
     "shelljs": "*",
     "cpu-stats": "*"
   },
+  "config": {
+	"alert_enabled": true,
+	"zombiesMax": 10,
+	"memMin": 5.0,
+	"driveMin": 10.0
+  },
   "apps": [
     {
       "name": "pm2-server-monit",
